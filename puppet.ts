@@ -8,10 +8,10 @@ const {Cluster} = require('puppeteer-cluster');
         monitor: true, //true,
         puppeteerOptions: {
 
-            args: [
-                "--proxy-server=http://gate.smartproxy.com:7000",
-                "--incognito",
-            ],
+            // args: [
+            //     "--proxy-server=http://gate.smartproxy.com:7000",
+            //     "--incognito",
+            // ],
             headless: false,
             sameDomainDelay: 1000,
             retryDelay: 3000,
@@ -29,27 +29,26 @@ const {Cluster} = require('puppeteer-cluster');
 
     });
     // Define a task
-    await cluster.task(async ({page, data: url}) => {
-        extract(url, page); //call the extract
-    });
+    // await cluster.task(async ({page, data: url}) => {
+    //     extract(url, page); //call the extract
+    // });
 
     //task
     const extract = async ({page, data: dataJson}) => {
         // page.setExtraHTTPHeaders({headers})
 
-        await page.authenticate({
-            username: 'sp39864586',
-            password: 'Test123'
-        });
+        // await page.authenticate({
+        //     username: 'sp39864586',
+        //     password: 'Test123'
+        // });
 
         //Randomized Delay
         //await delay(2000 + (Math.floor(Math.random() * 998) + 1));
         const response = await page.goto(dataJson.url, {waitUntil: 'domcontentloaded'});
 
-        await browser.close();
+        // await browser.close();
     }
 
-//loop over inputs, and queue them into cluster
     var dataJson = {
         url: 'www.example.com'
     };
